@@ -19,11 +19,7 @@ public class LogServices {
     }
 
     public List<Log> readLogs() {
-        var teste = new Log();
-        teste.setId("5464");
-        teste.setCarId("564.6564");
-        teste.setDateCar(OffsetDateTime.now());
-        return List.of(teste);
+        return List.of();
     }
 
 }

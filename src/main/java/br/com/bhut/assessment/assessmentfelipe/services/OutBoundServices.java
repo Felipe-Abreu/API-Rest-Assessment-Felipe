@@ -2,11 +2,13 @@ package br.com.bhut.assessment.assessmentfelipe.services;
 
 import br.com.bhut.assessment.assessmentfelipe.model.Car;
 import br.com.bhut.assessment.assessmentfelipe.model.Log;
+import br.com.bhut.assessment.assessmentfelipe.repository.RepositoryDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,13 +28,16 @@ public class OutBoundServices implements OutBoundCalls {
         return Optional.ofNullable(response.getBody()).map(List::of).orElse(List.of());
     }
 
+    @Autowired
+    private RepositoryDB repositoryDB;
+
     public Car postCar(Car car) {
         var resultCar = restTemplate.postForObject("http://api-test.bhut.com.br:3000/api/cars", car, Car.class);
         if (Objects.nonNull(resultCar)) {
             var log = new Log();
-            log.setDateCar(OffsetDateTime.now());
+            log.setDateCar(Date.from(OffsetDateTime.now().toInstant()));
             log.setCarId(resultCar.getId());
-            //salvar log no BD
+            repositoryDB.save(log);
             return resultCar;
         }
         return null;
