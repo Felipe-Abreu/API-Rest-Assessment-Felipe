@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class OutBoundServices implements OutBoundCalls {
+public class OutBoundServices extends ConfigurationApi implements OutBoundCalls {
 
     private final RestTemplate restTemplate;
     @Autowired
@@ -22,16 +22,17 @@ public class OutBoundServices implements OutBoundCalls {
 
     @Autowired
     public OutBoundServices(RestTemplate restTemplate) {
+
         this.restTemplate = restTemplate;
     }
 
     public List<Car> carsConsuming() {
-        var response = restTemplate.getForEntity("http://api-test.bhut.com.br:3000/api/cars", Car[].class);
+        var response = restTemplate.getForEntity(getBhutApi(), Car[].class);
         return Optional.ofNullable(response.getBody()).map(List::of).orElse(List.of());
     }
 
     public Car postCar(Car car) {
-        var resultCar = restTemplate.postForObject("http://api-test.bhut.com.br:3000/api/cars", car, Car.class);
+        var resultCar = restTemplate.postForObject(getBhutApi(), car, Car.class);
         if (Objects.nonNull(resultCar)) {
             var log = new Log();
             log.setDateCar(Date.from(OffsetDateTime.now().toInstant()));

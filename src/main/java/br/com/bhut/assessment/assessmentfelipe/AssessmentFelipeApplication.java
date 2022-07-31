@@ -9,8 +9,6 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 /**
  * ToDo testes unitários
- * ToDo salvar log no BD
- * ToDo parametrizar a URL da api externa - obrigatorios
  * ToDo criar fila - opcional
  * ToDo consumir a fila - opcional
  */
@@ -24,6 +22,7 @@ public class AssessmentFelipeApplication {
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
+
         return builder.build();
     }
 
