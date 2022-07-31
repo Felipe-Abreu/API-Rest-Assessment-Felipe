@@ -17,6 +17,8 @@ import java.util.Optional;
 public class OutBoundServices implements OutBoundCalls {
 
     private final RestTemplate restTemplate;
+    @Autowired
+    private RepositoryDB repositoryDB;
 
     @Autowired
     public OutBoundServices(RestTemplate restTemplate) {
@@ -27,9 +29,6 @@ public class OutBoundServices implements OutBoundCalls {
         var response = restTemplate.getForEntity("http://api-test.bhut.com.br:3000/api/cars", Car[].class);
         return Optional.ofNullable(response.getBody()).map(List::of).orElse(List.of());
     }
-
-    @Autowired
-    private RepositoryDB repositoryDB;
 
     public Car postCar(Car car) {
         var resultCar = restTemplate.postForObject("http://api-test.bhut.com.br:3000/api/cars", car, Car.class);

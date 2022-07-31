@@ -17,11 +17,13 @@ public class LogCarsController {
 
     @Autowired
     public LogCarsController(LogServices logCar) {
+
         this.logCar = logCar;
     }
 
     @GetMapping("logCars")
     public List<Log> logCars() {
+
         return logCar.readLogs();
     }
 }
