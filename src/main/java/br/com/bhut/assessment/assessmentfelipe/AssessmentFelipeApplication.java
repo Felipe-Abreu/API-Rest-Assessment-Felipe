@@ -8,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 /**
- * ToDo testes unitários
  * ToDo criar fila - opcional
  * ToDo consumir a fila - opcional
  */
