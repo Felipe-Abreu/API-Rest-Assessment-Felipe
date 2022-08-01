@@ -14,8 +14,7 @@ public class LogServices {
     private RepositoryDB repositoryDB;
 
     public List<Log> readLogs() {
-        List<Log> log = repositoryDB.findAll();
-        return log;
+        return repositoryDB.findAll();
     }
 
 }

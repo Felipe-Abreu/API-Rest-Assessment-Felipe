@@ -1,0 +1,8 @@
+app:
+  urlexternal: "http://api-test.bhut.com.br:3000/api/cars"
+
+spring:
+  data:
+    mongodb:
+      database: "repositoryDB"
+      uri: "mongodb+srv://felipe-abreu:saGMLo9Szm4ZZUP3@cluster0.rhpcyon.mongodb.net/?retryWrites=true&w=majority"

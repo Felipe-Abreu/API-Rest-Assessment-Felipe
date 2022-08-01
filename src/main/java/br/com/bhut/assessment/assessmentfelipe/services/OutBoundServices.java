@@ -1,5 +1,6 @@
 package br.com.bhut.assessment.assessmentfelipe.services;
 
+import br.com.bhut.assessment.assessmentfelipe.config.ConfigurationApi;
 import br.com.bhut.assessment.assessmentfelipe.model.Car;
 import br.com.bhut.assessment.assessmentfelipe.model.Log;
 import br.com.bhut.assessment.assessmentfelipe.repository.RepositoryDB;
@@ -14,25 +15,27 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class OutBoundServices extends ConfigurationApi implements OutBoundCalls {
+public class OutBoundServices implements OutBoundCalls {
 
     private final RestTemplate restTemplate;
-    @Autowired
-    private RepositoryDB repositoryDB;
+    private final RepositoryDB repositoryDB;
+    private final ConfigurationApi configurationApi;
 
     @Autowired
-    public OutBoundServices(RestTemplate restTemplate) {
+    public OutBoundServices(RestTemplate restTemplate, RepositoryDB repositoryDB, ConfigurationApi configurationApi) {
 
         this.restTemplate = restTemplate;
+        this.repositoryDB = repositoryDB;
+        this.configurationApi = configurationApi;
     }
 
     public List<Car> carsConsuming() {
-        var response = restTemplate.getForEntity(getBhutApi(), Car[].class);
+        var response = restTemplate.getForEntity(configurationApi.getBhutApi(), Car[].class);
         return Optional.ofNullable(response.getBody()).map(List::of).orElse(List.of());
     }
 
     public Car postCar(Car car) {
-        var resultCar = restTemplate.postForObject(getBhutApi(), car, Car.class);
+        var resultCar = restTemplate.postForObject(configurationApi.getBhutApi(), car, Car.class);
         if (Objects.nonNull(resultCar)) {
             var log = new Log();
             log.setDateCar(Date.from(OffsetDateTime.now().toInstant()));
