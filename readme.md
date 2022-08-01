@@ -43,10 +43,15 @@ Sendo então:
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
 <h6 align="center">Log de registro quando um carro é inserido </h6>
+
 ![img_3.png](img_3.png)
+
 <h6 align="center">Lista todos os carros consultando na apiExterna </h6>
+
 ![img_4.png](img_4.png)
+
 <h6 align="center">Post, criação de um carro dentro da API</h6>
+
 ![img_5.png](img_5.png)
 
 ---
