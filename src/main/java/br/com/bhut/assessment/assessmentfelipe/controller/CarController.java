@@ -13,12 +13,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("api")
 public class CarController {
 
-    /**
-     * não retornar toda a lista é o melhor(criar endpoint paginado)
-     * alteração necessário primeiramente na api externa
-     * caso recebesse muitos, manipular em paginação
-     */
-
     private final OutBoundCalls outBoundServices;
 
     @Autowired

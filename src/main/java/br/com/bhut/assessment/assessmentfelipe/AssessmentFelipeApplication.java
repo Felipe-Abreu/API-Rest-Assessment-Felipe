@@ -7,10 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-/**
- * ToDo criar fila - opcional
- * ToDo consumir a fila - opcional
- */
 public class AssessmentFelipeApplication {
 
     public static void main(String[] args) {
